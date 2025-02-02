@@ -38,7 +38,6 @@ async def search_users(title:str=None):
         return all_users
 async def search_movies(title:str=None):
     if title and title != "films" and title != "admin-kinolar":
-        print(title)
         title=title.split()[1] if len(title.split())>1 else None
         movies=CRUD(Models.Movie).select_all()
         results=[]
@@ -66,7 +65,6 @@ async def search_movies(title:str=None):
 async def last_added(title:str=None):
     diapason=3
     if title!='last-added':
-        print(title)
         title=title.split()[1] if len(title.split())>1 else None
         movies=CRUD(Models.Movie).select_all()
         movies=movies[0:diapason]
@@ -94,10 +92,8 @@ async def return_messages():
 
 async def block_user(id:int):
     CRUD(Models.User).update(id_=id, is_blockes='true')
-    print(f'User: {id} is successfully blocked')
 async def unblock_user(id:int):
     CRUD(Models.User).update(id_=id, is_blockes='false')
-    print(f'User: {id} is successfully unblocked')
 
 async def user_statistics():
     users=CRUD(Models.User).select_all()
@@ -122,7 +118,6 @@ async def search_movie(code:str=None):
 async def search_genre(title: str = None):
     if title:
         genre_title = title.split()[0] if len(title.split()) > 1 else title.strip()
-        print(genre_title)
         try:
             title = title.split()[1] if len(title.split()) > 1 else None
         except:
@@ -133,8 +128,7 @@ async def search_genre(title: str = None):
         for i in movies:
             if genre_title.title() in i.genre:
                 current_genre_movies.append(i)
-        for i in current_genre_movies:
-            print(i.title,i.genre)
+
 
 
         results = []
@@ -157,7 +151,6 @@ async def week_film():
 
 
 async def get_user_data(user_id:str):
-    print(user_id)
     user:['Models.User']=CRUD(Models.User).select_by_filter(user_id=user_id)
     caption=f"""Firstname | {user.first_name}
 Username | {user.user_name}
