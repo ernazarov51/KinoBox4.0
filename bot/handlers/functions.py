@@ -49,18 +49,7 @@ async def search_movies(title:str=None):
         return CRUD(Models.Movie).select_all()
 
 
-# async def search_movies(title: str = None):
-#     if title and title != "films" and title != "admin-kinolar":
-#         print(True)
-#         title = title.split()[1] if len(title.split()) > 1 else None
-#         if title:
-#             print(title)
-#             return CRUD(Models.Movie).select_filter_all(title=f"%{title}%")
-#         else:
-#             return []
-#     elif title == "films" or title == "admin-kinolar":
-#         print(False)
-#         return CRUD(Models.Movie).select_all()
+
 
 async def last_added(title:str=None):
     diapason=3
