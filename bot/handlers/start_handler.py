@@ -30,8 +30,7 @@ async def start_register(dp: Dispatcher, bot):
             if not user:
                 CRUD(Models.User).add(user_name=message.from_user.username, first_name=message.from_user.first_name,
                                       user_id=message.from_user.id, created_at=datetime.datetime.now())
-                await bot.send_message(text="Yana bir marta /start ni bosing)", chat_id=message.chat.id,
-                                       reply_markup=await create_button("/start", "1"))
+                await bot.send_message(text="Salom", chat_id=message.chat.id,reply_markup=user_start_ikb.as_markup())
             elif user.is_blockes != 'true':
                 await bot.send_message(text="Salom", chat_id=message.chat.id,reply_markup=user_start_ikb.as_markup()
                                        )
