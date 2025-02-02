@@ -1,0 +1,9 @@
+2024-11-13 10:29:58,062-DEBUG-Faylga murojat boshlandi
+2024-11-13 10:29:58,062-INFO-Dastur ishga tushdi!
+2024-11-13 10:29:58,468-WARNING-Xatolik, emailga xabar yuborilmadi!
+2024-11-13 10:31:25,916 - DEBUG - Faylga murojaat boshlandi
+2024-11-13 10:31:25,916 - INFO - Dastur ishga tushdi!
+2024-11-13 10:31:26,257 - WARNING - Xatolik, emailga xabar yuborilmadi! Xatolik matni: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+2024-11-13 10:31:45,481 - DEBUG - Faylga murojaat boshlandi
+2024-11-13 10:31:45,481 - INFO - Dastur ishga tushdi!
+2024-11-13 10:31:45,759 - WARNING - Xatolik, emailga xabar yuborilmadi! Xatolik matni: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
