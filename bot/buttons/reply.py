@@ -14,7 +14,4 @@ async def create_button(buttons_str: str, design: str):
 
     return rkb.as_markup(resize_keyboard=True)
 
-code = ReplyKeyboardBuilder()
-code.add(KeyboardButton(text=generate_unique_code()))
-code.adjust(1)
-code.one_time_keyboard = True
+

@@ -1,9 +1,11 @@
 import asyncio
 from aiogram import Dispatcher, F, Bot
 from aiogram.types import CallbackQuery, Message, InlineQuery, InlineQueryResultCachedVideo, \
-    InlineQueryResultArticle, InputTextMessageContent, InputMediaPhoto
+    InlineQueryResultArticle, InputTextMessageContent, InputMediaPhoto, KeyboardButton
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
+from aiogram.utils.keyboard import ReplyKeyboardBuilder
+
 from bot.buttons.inline import admin_kino_ikb, admin_main_ikb, conf_ikb, back_kb, admin_user_main_ikb, \
     kino_qosh_stop_ikb, users_admin_back_ikb, user_choice_ikb, user_back_ikb, user_main_ikb, kino_och, settings_ikb, \
     genres_ikb, next_state, user_start_ikb, settings_back_ikb
@@ -493,7 +495,10 @@ async def register_handler(dp: Dispatcher, bot: Bot):
             thumbnail_file_id = None
             if message.video.thumb and isinstance(message.video.thumb, dict):
                 thumbnail_file_id = message.video.thumb.get('file_id')
-
+            code = ReplyKeyboardBuilder()
+            code.add(KeyboardButton(text=generate_unique_code()))
+            code.adjust(1)
+            code.one_time_keyboard = True
             mesg1 = await bot.send_message(
                 text="Kino kodini kiriting:",
                 chat_id=message.chat.id,
