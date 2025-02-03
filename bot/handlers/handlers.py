@@ -307,14 +307,14 @@ async def register_handler(dp: Dispatcher, bot: Bot):
             await bot.send_message(chat_id=message.chat.id, text="Kino Muvaffaqqiyatli o'chirildi!")
 
     @dp.inline_query(lambda query: query.query.startswith((
-            'animes',
+            'anime',
             'jangari',
             'fantastika',
             'komediya',
             'drama',
             'triller',
             'sarguzasht',
-            'Ujas',
+            'ujas',
             'tarixiy',
             'biografik',
             'oilaviy',
