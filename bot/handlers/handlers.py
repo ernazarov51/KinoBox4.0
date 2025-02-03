@@ -87,7 +87,7 @@ async def register_handler(dp: Dispatcher, bot: Bot):
                 reply_markup=settings_back_ikb.as_markup()
             )
         if data == 'qidirish':
-            await bot.send_message(chat_id=chat_id, text="Kino kodini yuboring", reply_markup=user_back_ikb.as_markup())
+            await bot.edit_message_text(chat_id=chat_id,message_id=callback.message.message_id, text="Kino kodini yuboring", reply_markup=user_back_ikb.as_markup())
             await state.set_state(SearchState.input_code)
 
         if data == 'user_bekor':
