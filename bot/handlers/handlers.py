@@ -64,7 +64,7 @@ class AddGenre(StatesGroup):
 
 
 async def register_handler(dp: Dispatcher, bot: Bot):
-    genres = "Jangari,Fantastika,Komediya,Drama,Triller,Sarguzasht,Qo‘rqinchli,Tarixiy,Biografik,Oilaviy,Animatsiya,Detektiv"
+    genres = "Jangari,Fantastika,Kommediya,Drama,Triller,Sarguzasht,Qo‘rqinchli,Tarixiy,Biografik,Oilaviy,Animatsiya,Detektiv"
     current_genres=[]
 
     @dp.callback_query()
