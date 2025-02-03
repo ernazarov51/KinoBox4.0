@@ -547,9 +547,10 @@ async def register_handler(dp: Dispatcher, bot: Bot):
         print(True)
         text = ''
         for i in current_genres:
-            text += i
+            text += f'#{i}'
             text += ' '
         await state.update_data(genre=text)
+        current_genres.clear()
         msg4 = await message.reply("Kino chiqqan yil:")
         await state.set_state(AddMovie.year)
 
