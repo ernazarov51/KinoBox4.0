@@ -9,7 +9,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from bot.buttons.inline import admin_kino_ikb, admin_main_ikb, conf_ikb, back_kb, admin_user_main_ikb, \
     kino_qosh_stop_ikb, users_admin_back_ikb, user_choice_ikb, user_back_ikb, user_main_ikb, kino_och, settings_ikb, \
     genres_ikb, next_state, user_start_ikb, settings_back_ikb
-from bot.buttons.reply import create_button, code
+from bot.buttons.reply import create_button
 from bot.handlers.functions import kino_statistics, search_users, search_movies, return_messages, block_user, \
     unblock_user, user_statistics, search_movie, last_added, search_genre, week_film, get_user_data, \
     generate_unique_code
@@ -66,8 +66,8 @@ class AddGenre(StatesGroup):
 
 
 async def register_handler(dp: Dispatcher, bot: Bot):
-    genres = "Jangari,Fantastika,Kommediya,Drama,Triller,Sarguzasht,Qo‘rqinchli,Tarixiy,Biografik,Oilaviy,Animatsiya,Detektiv"
-    current_genres=[]
+    genres = "Jangari,Fantastika,Komediya,Drama,Triller,Sarguzasht,Ujas,Tarixiy,Biografik,Oilaviy,Animatsiya,Detektiv"
+    current_genres = []
 
     @dp.callback_query()
     async def process_callback(callback: CallbackQuery, state: FSMContext):
@@ -87,33 +87,39 @@ async def register_handler(dp: Dispatcher, bot: Bot):
                 reply_markup=settings_back_ikb.as_markup()
             )
         if data == 'qidirish':
-            await bot.send_message(chat_id=chat_id,text="Kino kodini yuboring", reply_markup=user_back_ikb.as_markup())
+            await bot.send_message(chat_id=chat_id, text="Kino kodini yuboring", reply_markup=user_back_ikb.as_markup())
             await state.set_state(SearchState.input_code)
 
         if data == 'user_bekor':
             await state.clear()
-            await bot.edit_message_text(chat_id=chat_id,message_id=callback.message.message_id, text="Assalomu Alaykum", reply_markup=user_main_ikb.as_markup())
+            await bot.edit_message_text(chat_id=chat_id, message_id=callback.message.message_id,
+                                        text="Assalomu Alaykum", reply_markup=user_main_ikb.as_markup())
 
         if data == 'appeal':
             await state.set_state(AppealState.input_message)
             await bot.send_message(chat_id=chat_id, text="📝")
-            await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text="Adminga yubormoqchi bo'lgan xabaringizni yozing:",
-                                   reply_markup=settings_back_ikb.as_markup())
+            await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                        text="Adminga yubormoqchi bo'lgan xabaringizni yozing:",
+                                        reply_markup=settings_back_ikb.as_markup())
 
         elif data == 'settings':
-            await bot.edit_message_text(chat_id=chat_id,message_id=callback.message.message_id,text="Settings", reply_markup=settings_ikb.as_markup())
+            await bot.edit_message_text(chat_id=chat_id, message_id=callback.message.message_id, text="Settings",
+                                        reply_markup=settings_ikb.as_markup())
 
         elif data == 'genre_list':
-            await bot.edit_message_text(chat_id=chat_id,message_id=callback.message.message_id,text="Janrlar Ro'yxati:", reply_markup=genres_ikb.as_markup())
+            await bot.edit_message_text(chat_id=chat_id, message_id=callback.message.message_id,
+                                        text="Janrlar Ro'yxati:", reply_markup=genres_ikb.as_markup())
 
         elif data == 'media':
-            await bot.edit_message_text(message_id=callback.message.message_id,text="Salom", chat_id=callback.message.chat.id, reply_markup=user_main_ikb.as_markup())
+            await bot.edit_message_text(message_id=callback.message.message_id, text="Salom",
+                                        chat_id=callback.message.chat.id, reply_markup=user_main_ikb.as_markup())
 
         elif data == 'genre_back':
-            await bot.edit_message_text(message_id=callback.message.message_id,text="⬅️", chat_id=callback.message.chat.id,
-                                   reply_markup=user_main_ikb.as_markup())
+            await bot.edit_message_text(message_id=callback.message.message_id, text="⬅️",
+                                        chat_id=callback.message.chat.id,
+                                        reply_markup=user_main_ikb.as_markup())
 
-        elif data=='main_back':
+        elif data == 'main_back':
             await bot.edit_message_text(
                 text="⬅️",
                 chat_id=callback.message.chat.id,
@@ -121,12 +127,14 @@ async def register_handler(dp: Dispatcher, bot: Bot):
                 reply_markup=user_start_ikb.as_markup()
             )
 
-        elif data=='user_settings_back':
-            await bot.edit_message_text(message_id=callback.message.message_id,text="Salom", chat_id=callback.message.chat.id, reply_markup=user_start_ikb.as_markup()
-                                   )
+        elif data == 'user_settings_back':
+            await bot.edit_message_text(message_id=callback.message.message_id, text="Salom",
+                                        chat_id=callback.message.chat.id, reply_markup=user_start_ikb.as_markup()
+                                        )
 
-        elif data=='admin_apeal_back':
-            await bot.send_message(text="Salom", chat_id=callback.message.chat.id,reply_markup=settings_ikb.as_markup())
+        elif data == 'admin_apeal_back':
+            await bot.send_message(text="Salom", chat_id=callback.message.chat.id,
+                                   reply_markup=settings_ikb.as_markup())
 
         elif data == 'week-film':
             movie = await week_film()
@@ -150,32 +158,38 @@ async def register_handler(dp: Dispatcher, bot: Bot):
         # ============== for user =========================
 
         if data == 'next':
-            await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id,text="janrlar saqlanishi uchun ixtioriy tugmani bosing")
+            await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                        text="janrlar saqlanishi uchun ixtioriy tugmani bosing")
             await state.set_state(AddMovie.try_genre)
 
         if data == 'unblock':
-            msg = await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text="⚠️ Blokdan chiqarish uchun User tanlang:",
-                                         reply_markup=user_choice_ikb.as_markup())
+            msg = await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                              text="⚠️ Blokdan chiqarish uchun User tanlang:",
+                                              reply_markup=user_choice_ikb.as_markup())
             await state.set_state(UnBlockState.userid_input)
 
         elif data == 'user_blok':
-            msg = await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text="⚠️ Bloklash uchun User tanlang:",
-                                         reply_markup=user_choice_ikb.as_markup())
+            msg = await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                              text="⚠️ Bloklash uchun User tanlang:",
+                                              reply_markup=user_choice_ikb.as_markup())
             await state.set_state(BlockState.userid_input)
 
         elif data == "messages":
             msg = await return_messages()
-            review = await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text=msg, reply_markup=users_admin_back_ikb.as_markup())
+            review = await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id, text=msg,
+                                                 reply_markup=users_admin_back_ikb.as_markup())
         elif data == "review_back":
 
-            await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text="Quyidagilardan tanlang:",
-                                   reply_markup=admin_user_main_ikb.as_markup())
+            await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                        text="Quyidagilardan tanlang:",
+                                        reply_markup=admin_user_main_ikb.as_markup())
 
         elif data == "test":
             await callback.message.answer("HI")
         elif data == "adminkino":
 
-            await bot.edit_message_text(chat_id=chat_id,message_id=callback.message.message_id,text="Kinolar holatiga o'tdingiz.", reply_markup=admin_kino_ikb.as_markup())
+            await bot.edit_message_text(chat_id=chat_id, message_id=callback.message.message_id,
+                                        text="Kinolar holatiga o'tdingiz.", reply_markup=admin_kino_ikb.as_markup())
 
 
         elif data == "tasdiqlash":
@@ -221,32 +235,35 @@ async def register_handler(dp: Dispatcher, bot: Bot):
             await bot.delete_message(chat_id=chat_id, message_id=msg.message_id)
 
         elif data == 'adminqosh':
-            msg0 = await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text="✅ Kino qo'shish bo'limi",
-                                          reply_markup=kino_qosh_stop_ikb.as_markup())
+            msg0 = await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                               text="✅ Kino qo'shish bo'limi",
+                                               reply_markup=kino_qosh_stop_ikb.as_markup())
             msg_ = await bot.send_message(chat_id=chat_id, text="Kino ni jo'nating?")
             await state.set_state(AddMovie.video)
 
-        elif data=='login_like_user':
-            await callback.message.reply(text="Hello",reply_markup=user_main_ikb.as_markup())
+        elif data == 'login_like_user':
+            await callback.message.reply(text="Hello", reply_markup=user_main_ikb.as_markup())
 
         elif data == 'kino_qosh_otmen':
-            await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text="Kinolar holatiga o'tdingiz.",
-                                   reply_markup=admin_kino_ikb.as_markup())
-
+            await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                        text="Kinolar holatiga o'tdingiz.",
+                                        reply_markup=admin_kino_ikb.as_markup())
 
             await state.clear()
 
         elif data == 'adminoch':
-            await bot.edit_message_text(message_id=callback.message.message_id,chat_id=chat_id, text="O'chirmoqchi bo'lgan kinoni tanlashingiz mumkin",
-                                   reply_markup=kino_och.as_markup())
+            await bot.edit_message_text(message_id=callback.message.message_id, chat_id=chat_id,
+                                        text="O'chirmoqchi bo'lgan kinoni tanlashingiz mumkin",
+                                        reply_markup=kino_och.as_markup())
             await state.set_state(DeleteMovie.kino_input)
         elif data == "adminback":
-            await bot.edit_message_text(chat_id=chat_id,message_id=callback.message.message_id,text="Ishni boshlash uchun quidagilardan birini tanlang",
-                                          reply_markup=admin_main_ikb.as_markup())
+            await bot.edit_message_text(chat_id=chat_id, message_id=callback.message.message_id,
+                                        text="Ishni boshlash uchun quidagilardan birini tanlang",
+                                        reply_markup=admin_main_ikb.as_markup())
             await state.clear()
         elif data == 'orqaga':
-            await bot.delete_message(message_id=callback.message.message_id,chat_id=chat_id,
-                                   )
+            await bot.delete_message(message_id=callback.message.message_id, chat_id=chat_id,
+                                     )
             await state.clear()
 
 
@@ -278,8 +295,8 @@ async def register_handler(dp: Dispatcher, bot: Bot):
 
 
         elif data == 'adminuserdeeds':
-            await bot.edit_message_text(chat_id=chat_id,message_id=callback.message.message_id,text="Quyidagilardan tanlang:", reply_markup=admin_user_main_ikb.as_markup())
-
+            await bot.edit_message_text(chat_id=chat_id, message_id=callback.message.message_id,
+                                        text="Quyidagilardan tanlang:", reply_markup=admin_user_main_ikb.as_markup())
 
     @dp.message(DeleteMovie.kino_input)
     async def delete_movie(message: Message, state: FSMContext):
@@ -297,7 +314,7 @@ async def register_handler(dp: Dispatcher, bot: Bot):
             'drama',
             'triller',
             'sarguzasht',
-            'qo‘rqinchli',
+            'Ujas',
             'tarixiy',
             'biografik',
             'oilaviy',
@@ -485,8 +502,6 @@ async def register_handler(dp: Dispatcher, bot: Bot):
             users.append(users_result)
         await inline_query.answer(users, cache_time=1, is_personal=True)
 
-
-
     @dp.message(AddMovie.video)
     async def video(message: Message, state: FSMContext):
         try:
@@ -498,7 +513,6 @@ async def register_handler(dp: Dispatcher, bot: Bot):
             code = ReplyKeyboardBuilder()
             code.add(KeyboardButton(text=generate_unique_code()))
             code.adjust(1)
-            code.one_time_keyboard = True
             mesg1 = await bot.send_message(
                 text="Kino kodini kiriting:",
                 chat_id=message.chat.id,
@@ -507,7 +521,6 @@ async def register_handler(dp: Dispatcher, bot: Bot):
 
             if thumbnail_file_id:
                 await state.update_data(thumbnail_file_id=thumbnail_file_id)
-
 
             await state.set_state(AddMovie.kod)
         except Exception as e:
@@ -537,15 +550,13 @@ async def register_handler(dp: Dispatcher, bot: Bot):
         await state.set_state(AddMovie.genre)
         print(message.text)
 
-
-
     @dp.message(AddMovie.genre)
     async def year(message: Message, state: FSMContext):
-        genre=message.text
+        genre = message.text
         current_genres.append(genre)
-        await bot.send_message(chat_id=message.chat.id,text="Yana Janr Tanlashingiz mumkin",reply_markup=next_state.as_markup())
+        await bot.send_message(chat_id=message.chat.id, text="Yana Janr Tanlashingiz mumkin",
+                               reply_markup=next_state.as_markup())
         msg4 = await message.reply("Yana janr tanlang")
-
 
     @dp.message(AddMovie.try_genre)
     async def year(message: Message, state: FSMContext):
@@ -562,19 +573,21 @@ async def register_handler(dp: Dispatcher, bot: Bot):
     @dp.message(AddMovie.year)
     async def language(message: Message, state: FSMContext):
         await state.update_data(year=message.text)
-        msg5 = await message.reply("Trjima tilini kiriting:",reply_markup=await create_button("Ingliz tilida,Rus tilida,O'zbek tilida",'2,1'))
+        msg5 = await message.reply("Trjima tilini kiriting:",
+                                   reply_markup=await create_button("Ingliz tilida,Rus tilida,O'zbek tilida", '2,1'))
         await state.set_state(AddMovie.language)
 
     @dp.message(AddMovie.language)
     async def country(message: Message, state: FSMContext):
         await state.update_data(language=message.text)
-        msg6 = await message.reply("Kino davlatini kiritng:",reply_markup=await create_button('AQSH,UZB,Rossiya,Britaniya,Hindiston,Xitoy,Koreya,Yaponiya,Aniqlanmadi','2,2,2,2,1'))
+        msg6 = await message.reply("Kino davlatini kiritng:", reply_markup=await create_button(
+            'AQSH,UZB,Rossiya,Britaniya,Hindiston,Xitoy,Koreya,Yaponiya,Aniqlanmadi', '2,2,2,2,1'))
         await state.set_state(AddMovie.country)
 
     @dp.message(AddMovie.country)
     async def age_border(message: Message, state: FSMContext):
         await state.update_data(country=message.text)
-        msg7 = await message.reply("Yosh chegarasi:",reply_markup=await create_button('0,12,16,18','2,2'))
+        msg7 = await message.reply("Yosh chegarasi:", reply_markup=await create_button('0,12,16,18', '2,2'))
 
         await state.set_state(AddMovie.age_border)
 

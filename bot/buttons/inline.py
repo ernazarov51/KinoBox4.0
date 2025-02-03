@@ -62,10 +62,10 @@ user_main_ikb.add(InlineKeyboardButton(text='🔍 Qidiruv', callback_data='qidir
                   InlineKeyboardButton(text="🆕 Yangi kinolar", switch_inline_query_current_chat='last-added'),
                   InlineKeyboardButton(text="🎬 Janrlar Ro'yxati", callback_data='genre_list'),
                   InlineKeyboardButton(text="🏆 Hafta filmi", callback_data='week-film'),
-InlineKeyboardButton(
-        text="⬅️ Orqaga", callback_data='main_back')
+                  InlineKeyboardButton(
+                      text="⬅️ Orqaga", callback_data='main_back')
                   )
-user_main_ikb.adjust(2, 2, 1,1)
+user_main_ikb.adjust(2, 2, 1, 1)
 
 genres_ikb = InlineKeyboardBuilder()
 genres_ikb.add(
@@ -75,7 +75,7 @@ genres_ikb.add(
     InlineKeyboardButton(text='Drama 🎭', switch_inline_query_current_chat='drama'),
     InlineKeyboardButton(text='Triller 🔪', switch_inline_query_current_chat='triller'),
     InlineKeyboardButton(text='Sarguzasht 🗺️', switch_inline_query_current_chat='sarguzasht'),
-    InlineKeyboardButton(text='Qo‘rqinchli 👻', switch_inline_query_current_chat='qo‘rqinchli'),
+    InlineKeyboardButton(text='Qo‘rqinchli 👻', switch_inline_query_current_chat='ujas'),
     InlineKeyboardButton(text='Tarixiy 🏰', switch_inline_query_current_chat='tarixiy'),
     InlineKeyboardButton(text='Biografik 📖', switch_inline_query_current_chat='biografik'),
     InlineKeyboardButton(text='Oilaviy 👨‍👩‍👧‍👦', switch_inline_query_current_chat='oilaviy'),
@@ -87,7 +87,7 @@ genres_ikb.add(
 
 )
 
-genres_ikb.adjust(2, 3, 2, 3, 2, 1,1)
+genres_ikb.adjust(2, 3, 2, 3, 2, 1, 1)
 
 next_state = InlineKeyboardBuilder()
 next_state.add(InlineKeyboardButton(text="❌", callback_data='next'))
@@ -98,12 +98,12 @@ user_back_ikb.add(InlineKeyboardButton(text="❌ Bekor qilish", callback_data='u
 settings_ikb = InlineKeyboardBuilder()
 settings_ikb.add(InlineKeyboardButton(text="My Data", callback_data='mydata'),
                  InlineKeyboardButton(text="👨‍💻 Adminga murojaat", callback_data='appeal'),
-                 InlineKeyboardButton(text="⬅️ Back",callback_data='user_settings_back'))
+                 InlineKeyboardButton(text="⬅️ Back", callback_data='user_settings_back'))
 
-settings_ikb.adjust(2,1)
+settings_ikb.adjust(2, 1)
 
 settings_back_ikb = InlineKeyboardBuilder()
-settings_back_ikb.add(InlineKeyboardButton(text="❌ Bekor qilish",callback_data='admin_apeal_back'))
+settings_back_ikb.add(InlineKeyboardButton(text="❌ Bekor qilish", callback_data='admin_apeal_back'))
 
 # user_genre_back_ikb = InlineKeyboardBuilder()
 # user_genre_back_ikb.add(InlineKeyboardButton(
